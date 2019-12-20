@@ -58,3 +58,7 @@ a {
     font-weight: 800;
   }
 }
+
+.sidebar-brand img {
+  filter: brightness(0) invert(1);
+}
