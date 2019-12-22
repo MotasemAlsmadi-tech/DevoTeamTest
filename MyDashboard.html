@@ -19,7 +19,7 @@
 
   <!-- Custom styles for this template-->
   <link href="css/nhc-admin-2.min.css" rel="stylesheet">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -165,7 +165,8 @@
                   </div>
                   <div>
                     <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">We did Recived your Request with Referance <span class="text-primary">#122315</span> needs 3 working days</span>
+                    <span class="font-weight-bold">We did Recived your Request with Referance <span
+                        class="text-primary">#122315</span> needs 3 working days</span>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -176,10 +177,11 @@
                   </div>
                   <div>
                     <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">We did Recived your Request with Referance <span class="text-primary">#122315</span> needs 3 working days</span>
+                    <span class="font-weight-bold">We did Recived your Request with Referance <span
+                        class="text-primary">#122315</span> needs 3 working days</span>
                   </div>
                 </a>
-               <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
                     <div class="icon-circle bg-primary">
                       <i class="fas fa-file-alt text-white"></i>
@@ -187,14 +189,15 @@
                   </div>
                   <div>
                     <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">We did Recived your Request with Referance <span class="text-primary">#122315</span> needs 3 working days</span>
+                    <span class="font-weight-bold">We did Recived your Request with Referance <span
+                        class="text-primary">#122315</span> needs 3 working days</span>
                   </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
               </div>
             </li>
 
-          
+
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -232,7 +235,7 @@
         </nav>
         <!-- End of Topbar -->
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container-fluid" ng-app="myApp" ng-controller="myCtrl">
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -335,11 +338,49 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr ng-repeat="item in data.items">
+                      <td>{{item.id}}</th>
+                      <td>{{item.Title}}</td>
+                      <td>{{item.Service}} - {{item.Category}}</td>
+                      <td>
+                        <span ng-if="item.Status == 'New'" class="badge badge-primary">{{item.Status}}</span>
+                        <span ng-if="item.Status == 'Pending'" class="badge badge-warning">{{item.Status}}</span>
+                        <span ng-if="item.Status == 'Rejected'" class="badge badge-danger">{{item.Status}}</span>
+                        <span ng-if="item.Status == 'Active'" class="badge badge-info">{{item.Status}}</span>
+                        <span ng-if="item.Status == 'Resolved'" class="badge badge-success">{{item.Status}}</span>
+
+                      </td>
+                      <td><i class="fas fa-calendar text-secondary"></i> {{item.Date}} <br /><span
+                          class="text-success"><i class="fas fa-clock text-secondary"></i> {{item.Time}}</span></td>
+                      <td>
+                        <span ng-if="item.Severity == 'High'" class="text-danger">{{item.Severity}}</span>
+                        <span ng-if="item.Severity == 'Medium'" class="text-warning">{{item.Severity}}</span>
+                        <span ng-if="item.Severity == 'Low'" class="text-info">{{item.Severity}}</span>
+                      </td>
+                      <td>
+
+                        <div class="dropdown no-arrow">
+                          <a class="btn btn-sm btn-link  dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink" x-placement="bottom-end"
+                            style="position: absolute; transform: translate3d(-156px, 18px, 0px); top: 0px; left: 0px; will-change: transform;">
+                            <div class="dropdown-header"> Actions:</div>
+                            <a class="dropdown-item" href="#">Review</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Edit</a>
+                          </div>
+                        </div>
+                      </td>
+
+                    </tr>
+                    <!-- <tr>
                       <th scope="row">10002</th>
-                      <td>Last 3 Month payslip</td>
-                      <td>Payslip - Finance</td>
-                      <td><span class="badge badge-primary">New</span></td>
+                      <td>Computer hardware Defect</td>
+                      <td>Technical Support - IT Department</td>
+                      <td><span class="badge badge-warning">Pending</span></td>
                       <td><i class="fas fa-calendar text-secondary"></i> 12-10-2019 <br /><span class="text-success"><i
                             class="fas fa-clock text-secondary"></i> 10:30 am</span></td>
                       <td><span class="text-danger">High</span></td>
@@ -365,32 +406,6 @@
                       <th scope="row">10002</th>
                       <td>Computer hardware Defect</td>
                       <td>Technical Support - IT Department</td>
-                          <td><span class="badge badge-warning">Pending</span></td>
-                      <td><i class="fas fa-calendar text-secondary"></i> 12-10-2019 <br /><span class="text-success"><i
-                            class="fas fa-clock text-secondary"></i> 10:30 am</span></td>
-                      <td><span class="text-danger">High</span></td>
-                      <td>
-                        <div class="dropdown no-arrow">
-                          <a class="btn btn-sm btn-link  dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                            aria-labelledby="dropdownMenuLink" x-placement="bottom-end"
-                            style="position: absolute; transform: translate3d(-156px, 18px, 0px); top: 0px; left: 0px; will-change: transform;">
-                            <div class="dropdown-header"> Actions:</div>
-                            <a class="dropdown-item" href="#">Review</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Edit</a>
-                          </div>
-                        </div>
-                      </td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row">10002</th>
-                      <td>Computer hardware Defect</td>
-                      <td>Technical Support - IT Department</td>
                       <td><span class="badge badge-primary">New</span></td>
                       <td><i class="fas fa-calendar text-secondary"></i> 12-10-2019 <br /><span class="text-success"><i
                             class="fas fa-clock text-secondary"></i> 10:30 am</span></td>
@@ -405,7 +420,7 @@
                             aria-labelledby="dropdownMenuLink" x-placement="bottom-end"
                             style="position: absolute; transform: translate3d(-156px, 18px, 0px); top: 0px; left: 0px; will-change: transform;">
                             <div class="dropdown-header"> Actions:</div>
-                           <a class="dropdown-item" href="#">Review</a>
+                            <a class="dropdown-item" href="#">Review</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Edit</a>
                           </div>
@@ -431,7 +446,7 @@
                             aria-labelledby="dropdownMenuLink" x-placement="bottom-end"
                             style="position: absolute; transform: translate3d(-156px, 18px, 0px); top: 0px; left: 0px; will-change: transform;">
                             <div class="dropdown-header"> Actions:</div>
-                          <a class="dropdown-item" href="#">Review</a>
+                            <a class="dropdown-item" href="#">Review</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Edit</a>
                           </div>
@@ -457,14 +472,14 @@
                             aria-labelledby="dropdownMenuLink" x-placement="bottom-end"
                             style="position: absolute; transform: translate3d(-156px, 18px, 0px); top: 0px; left: 0px; will-change: transform;">
                             <div class="dropdown-header"> Actions:</div>
-                           <a class="dropdown-item" href="#">Review</a>
+                            <a class="dropdown-item" href="#">Review</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Edit</a>
                           </div>
                         </div>
                       </td>
 
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
                 <nav aria-label="Page navigation example">
@@ -576,7 +591,21 @@
   <!-- Page level custom scripts -->
 
   <script src="js/demo/chart-pie-demo.js"></script>
+  <script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope, $http) {
+      $http({
+        method: "GET",
+        url: "./dataservice/data.json"
+      }).then(function (response) {
+        debugger
+        $scope.data = response.data;
+      }, function (response) {
+        $scope.data = response.statusText;
+      });
+    });
 
+  </script>
 </body>
 
 </html>
